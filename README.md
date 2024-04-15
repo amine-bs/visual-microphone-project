@@ -29,3 +29,8 @@ To visualize the spectrogram of an audio signal, run the following:
 ```
 python show_spectrogram.py --audio_path data/result.wav
 ```
+
+Here are the spectrograms for the source audio and the resulting audio respectively:
+
+![source spectrogram](spectrograms/source_spec.jpg) 
+![result spectrogram](spectrograms/result_spec.jpg)
