@@ -1,9 +1,9 @@
 import numpy as np
-from time import time
+from tqdm import tqdm
+from copy import deepcopy
 
 from src.utils import imresize, im2single, pyrBand
 from src.vmAlignAtoB import vmAlignAToB
-from copy import deepcopy
 from scipy.signal import butter, lfilter
 from src.buildSCFpyr import buildSCFpyr
 
@@ -16,7 +16,6 @@ def vmSoundFromVideo(
         dSampleFactor=0.1,
         samplingRate=60
 ):
-    tic = time()
     if samplingRate < 0:
         samplingRate = vHandle.FrameRate
 
@@ -37,6 +36,7 @@ def vmSoundFromVideo(
     totalsigs = nScalesin * nOrientationsin
     signalffs = np.zeros((nScalesin, nOrientationsin, nF))
     ampsigs = np.zeros((nScalesin, nOrientationsin, nF))
+    pb = tqdm(desc="Processing", total=nF)
 
     for q in range(nF):
         ret, vframein = vHandle.read(q)
@@ -65,6 +65,7 @@ def vmSoundFromVideo(
                 ampsigs[j, k, q] = sumamp
 
                 signalffs[j, k, q] = np.mean(phasew) / sumamp
+        pb.update(1)
 
     sigOut = np.zeros((nF,))
     for q in range(nScalesin):
