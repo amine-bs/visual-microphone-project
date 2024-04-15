@@ -14,7 +14,7 @@ apt-get install libgl1
 ```
 ## Usage:
 ```
-python main.py --video_path test.avi --output_path out.wav
+python main.py --video_path data/test_vid.mp4 --output_path out.wav
 ```
 
 To test the code on a real video from the Visual Microphone project, you can get the video with the following command:
@@ -23,4 +23,9 @@ To test the code on a real video from the Visual Microphone project, you can get
 wget https://data.csail.mit.edu/vidmag/VisualMic/Results/Chips2-2200Hz-Mary_MIDI-input.avi
 ```
 
-The resulting audio from this video using this code is `result.wav` 
+The resulting audio from this video using this code is `data/result.wav`. You can also find the source audio in `data/MaryMIDI.mp3`
+
+To visualize the spectrogram of an audio signal, run the following:
+```
+python show_spectrogram.py --audio_path data/result.wav
+```
